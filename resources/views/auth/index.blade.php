@@ -10,10 +10,35 @@
 
     <title>{{ config('app.name', 'Admin') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/lib.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('js/lib.js') }}"></script>
 </head>
-<body>
+<body style="background: white;">
+    <nav class="navbar navbar-default navbar-static-top" style="background: gray;">
+        <div class="container" style="width: 95%;">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url('/admin') }}">
+                    Admin Area
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div id="root"></div>
+    <script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>
