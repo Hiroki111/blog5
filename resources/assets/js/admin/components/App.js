@@ -18,7 +18,7 @@ export default class App extends React.Component {
 				<div>
 					<ul className="sidebar">
         				<li className="sidebar-list">
-        					<NavLink to="/posts" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }}>Posts</NavLink>
+        					<NavLink to="/posts" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Posts</NavLink>
         				</li>
         			</ul>
 					<div className="admin-contents">
