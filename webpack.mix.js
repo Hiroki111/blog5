@@ -11,5 +11,5 @@ let mix = require('laravel-mix');
  |
  */
 
-mix.styles('resources/assets/css/admin/*.css', 'public/css/admin.css');
+//mix.styles('resources/assets/css/admin/*.css', 'public/css/admin.css');
 mix.styles('resources/assets/css/lib/*.css', 'public/css/lib.css');
