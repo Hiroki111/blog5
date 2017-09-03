@@ -8,7 +8,12 @@ export default class Posts extends React.Component {
 	render() {
 		return (
 			<div>
-			Posts Component
+				<div>
+				Search
+				</div>
+				<div>
+				List
+				</div>
 			</div>
 		);
 	}
