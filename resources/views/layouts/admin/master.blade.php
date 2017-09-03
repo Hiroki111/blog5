@@ -12,7 +12,7 @@
     <script src="{{ asset('js/lib.js') }}"></script>
 </head>
 <body style="background: white;">
-    <nav class="navbar navbar-default navbar-static-top" @if(!Auth::guest()) style="background: gray; height: 47px; margin-bottom: 0;" @endif>
+    <nav class="navbar navbar-default navbar-static-top" @if(!Auth::guest()) style="background: gray; height: 47px; margin-bottom: 0; padding: 0px;" @endif>
         <div class="container" style="width: 95%;  margin-left: 0px; padding-left: 40px;">
             <div class="navbar-header">
                 @if(Auth::guest())
