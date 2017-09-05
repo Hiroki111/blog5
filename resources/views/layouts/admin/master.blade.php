@@ -12,15 +12,15 @@
     <script src="{{ asset('js/lib.js') }}"></script>
 </head>
 <body style="background: white;">
-    <nav class="navbar navbar-default navbar-static-top" @if(!Auth::guest()) style="background: white; height: 47px; margin-bottom: 0; padding: 0px;" @endif>
+    <nav class="navbar navbar-default navbar-static-top" @if(!Auth::guest()) style="background: #113470; height: 47px; margin-bottom: 0; padding: 0px;" @endif>
         <div class="container" style="width: 95%;  margin-left: 0px; padding-left: 40px;">
             <div class="navbar-header">
                 @if(Auth::guest())
-                <a class="navbar-brand" href="{{ url('/') }}" style="color: black;">
+                <a class="navbar-brand" href="{{ url('/') }}" style="color: white;">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 @else
-                <a class="navbar-brand" href="{{ url('/admin') }}" style="color: black;">
+                <a class="navbar-brand" href="{{ url('/admin') }}" style="color: white; font-weight: bold;">
                     Admin Area
                 </a>
                 @endif
@@ -31,7 +31,7 @@
                     <li>
                         <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();" style="color: black;">
+                        document.getElementById('logout-form').submit();" style="color: white;">
                         Logout
                     </a>
                     </li>

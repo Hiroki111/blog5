@@ -10,6 +10,14 @@ import 'froala-editor/css/froala_style.min.css';
 import 'froala-editor/css/froala_editor.pkgd.min.css';
 import FroalaEditor from 'react-froala-wysiwyg';
 
+const divStyle = {
+	'maxWidth': '95%'
+};
+
+const editorConfig = {
+	charCounterCount: true
+};
+
 export default class EditingPost extends React.Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +28,11 @@ export default class EditingPost extends React.Component {
 			<div>
 				<Link to="/posts">Return</Link>
 				<div>Title</div>
-				<div><FroalaEditor tag='textarea'/></div>
+				<div style={divStyle}>
+					<FroalaEditor
+					tag='textarea'
+					config={editorConfig}/>
+				</div>
 			</div>
 		);
 	}
