@@ -1,41 +1,41 @@
 import axios from 'axios';
 
-export function addWord(word) {
+export function addPost(post) {
 	return {
-		type: "ADD_WORD",
-		data: word,
+		type: "ADD_POST",
+		data: post,
 	};
 }
 
-export function updateWord(word) {
+export function updatePost(Post) {
 	return {
-		type: "UPDATE_WORD",
-		data: word,
+		type: "UPDATE_POST",
+		data: post,
 	};
 }
 
-export function setWord(word) {
+export function getPost(id) {
 	return {
-		type: "SET_WORD",
-		data: word,
-	};
-}
-
-export function deleteWord(id) {
-	return {
-		type: "DELETE_WORD",
+		type: "GET_POST",
 		data: id,
 	};
 }
 
-export function sortWords(order) {
+export function deletePost(id) {
 	return {
-		type: "SORT_WORDS",
+		type: "DELETE_POST",
+		data: id,
+	};
+}
+
+export function sortPosts(order) {
+	return {
+		type: "SORT_POSTS",
 		data: order,
 	};
 }
 
-export function fetchWords() {
+export function fetchPosts() {
 	return function(dispatch) {
 		axios.get()
 			.then((response) => {

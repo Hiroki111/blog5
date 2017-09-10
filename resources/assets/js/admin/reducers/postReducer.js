@@ -1,75 +1,36 @@
 export default function postReducer(state = {
 	post: {
-		word: "",
-		pronunciation: "",
+		id: 0,
+		active: 0,
+		title: "",
 		type: "",
-		meaning: "",
-		example: "",
+		body: "",
+		published_at: "",
 	},
-	words: [],
-	sortBy: "FO",
+	posts: [],
 }, action) {
 	switch (action.type) {
-		case "FETCH_WORDS":
+		case "FETCH_POSTS":
 			{
 				return {
 					...state,
-					words: action.data,
+					posts: action.data,
 				}
 				break;
 			}
-		case "SET_WORD":
+		case "FETCH_POSTS_ERROR":
 			{
 				return {
 					...state,
-					word: action.data,
+					posts: [],
 				}
 				break;
 			}
-		case "FETCH_WORDS_ERROR":
+		case "ADD_POST":
 			{
 				return {
 					...state,
-					words: [],
-				}
-				break;
-			}
-		case "ADD_WORD":
-			{
-				return {
-					...state,
-					words: [...state.words, action.data],
-				}
-				break;
-			}
-		case "UPDATE_WORD":
-			{
-				return {
-					...state,
-					words: state.words.map(function(word) {
-						if (word.id === action.data.id) {
-							return action.data;
-						}
-						else {
-							return word;
-						}
-					}),
-				}
-			}
-		case "DELETE_WORD":
-			{
-				return {
-					...state,
-					words: state.words.filter(function(word) {
-						return word.id != action.data;
-					}),
-				}
-			}
-		case "SORT_WORDS":
-			{
-				return {
-					...state,
-					sortBy: action.data,
+					posts: [...state.posts, action.data],
 				}
 				break;
 			}
