@@ -6,7 +6,7 @@ import {
 	Switch
 }
 from 'react-router-dom';
-import EditingPost from './EditingPost';
+import EditingPost from './EditingPost/index.js';
 
 const Top = () => (
 	<div>

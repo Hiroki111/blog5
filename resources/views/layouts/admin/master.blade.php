@@ -9,6 +9,7 @@
     <title>{{ config('app.name') }}</title>
     <link href="{{ asset('css/lib.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="{{ asset('js/lib.js') }}"></script>
 </head>
 <body style="background: white;">
