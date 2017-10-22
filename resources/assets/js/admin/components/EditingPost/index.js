@@ -20,24 +20,7 @@ import {
 }
 from 'react-bootstrap';
 import lodash from 'lodash';
-
-const divStyle = {
-	'maxWidth': '95%'
-};
-
-const editorConfig = {
-	charCounterCount: true
-};
-
-const publishDiv = {
-	'marginTop': '10px',
-	'marginBottom': '10px',
-};
-
-const wholeDiv = {
-	'marginLeft': '5px',
-	'paddingTop': '30px'
-};
+import styles from "./styles";
 
 @connect((store) => {
 	return {
@@ -111,37 +94,29 @@ export default class EditingPost extends React.Component {
 	}
 
 	render() {
-		console.log("this.state", this.state, "lodash.size(this.state.errorMessages)", lodash.size(this.state.errorMessages));
 		return (
-			<div style={wholeDiv}>
+			<div style={styles.wholeDiv}>
 					<Link to="/posts">Return</Link>
-				<div style={divStyle}>
-		        	<div className="section section-notifications" id="notifications">
-		        		{this.state.success &&
-	        				<div className="alert alert-success">
-	            				<div className="container-fluid">
-									<div className="alert-icon">
-										<i className="material-icons">check</i>
-									</div>
-									<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-										<span aria-hidden="true"><i className="material-icons">clear</i></span>
-									</button>
-	            					<b>Success</b>
-	            				</div>
-	        				</div>
-	        			}
-	        			{lodash.size(this.state.errorMessages) > 0 &&
-	        				<Alert bsStyle="danger">
-          						<strong>Error</strong>
-          						{Object.keys(this.state.errorMessages)
-          						.map((key) => <p key={this.state.errorMessages[key]}>{this.state.errorMessages[key]}</p>)}
-        					</Alert>
-	        			}
-	        			<div className="clearfix"></div>
-	    			</div>
+				<div style={styles.alartDiv}>
+		        	{this.state.success &&
+		        		<Alert bsStyle="success" style={styles.alart}>
+							<div className="alert-icon">
+								<i className="material-icons">check</i>
+							</div>
+	            			<b>Success</b>
+		        		</Alert>
+	        		}
+	        		{lodash.size(this.state.errorMessages) > 0 &&
+	        			<Alert bsStyle="danger" style={styles.alart}>
+          					<strong>Error</strong>
+          					{Object.keys(this.state.errorMessages)
+          					.map((key) => <p key={this.state.errorMessages[key]}>{this.state.errorMessages[key]}</p>)}
+        				</Alert>
+	        		}
+	        		<div className="clearfix"></div>
 	    		</div>
-	    		<div style={divStyle}>
-	    			<div className="form-group" style={divStyle}>
+	    		<div style={styles.divStyle}>
+	    			<div className="form-group" style={styles.divStyle}>
 						<input type="text" 
 							placeholder="Title"
 							className="form-control"
@@ -150,16 +125,16 @@ export default class EditingPost extends React.Component {
 		        		<span className="material-input"></span>
 		        	</div>
 		        </div>
-				<div style={divStyle}>
+				<div style={styles.divStyle}>
 					<FroalaEditor
 					tag='textarea'
-					config={editorConfig}
+					config={styles.editorConfig}
 					model={this.state.post.body}
 					name="body"
 					onModelChange={this.onBodyChange} />
 				</div>
 				<div>
-					<div style={publishDiv} className="checkbox">
+					<div style={styles.publishDiv} className="checkbox">
 						<label>
 							<input id="published"
 								type="checkbox"
