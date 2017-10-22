@@ -95,7 +95,7 @@ export default class EditingPost extends React.Component {
 
 	render() {
 		return (
-			<div style={styles.wholeDiv}>
+			<div>
 					<Link to="/posts">Return</Link>
 				<div style={styles.alartDiv}>
 		        	{this.state.success &&

@@ -1,9 +1,9 @@
 export default {
 	divStyle: {
-		maxWidth: '95%'
+		maxWidth: '1000px'
 	},
 	alartDiv: {
-		maxWidth: '95%',
+		maxWidth: '1000px',
 		height: '90px',
 		marginTop: '10px'
 	},
@@ -16,9 +16,5 @@ export default {
 	publishDiv: {
 		marginTop: '10px',
 		marginBottom: '10px',
-	},
-	wholeDiv: {
-		marginLeft: '5px',
-		paddingTop: '30px'
 	},
 };

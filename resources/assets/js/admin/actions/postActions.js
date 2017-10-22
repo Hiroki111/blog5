@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export function addPost(post) {
 	return {
@@ -37,11 +37,17 @@ export function sortPosts(order) {
 
 export function fetchPosts() {
 	return function(dispatch) {
-		axios.get()
+		axios.get('/posts')
 			.then((response) => {
-				dispatch(type: "", data: response.data);
+				dispatch({
+					type: "FETCH_POSTS",
+					data: response.data
+				});
 			}).catch((error) => {
-				dispatch(type: "", data: error);
+				dispatch({
+					type: "FETCH_POSTS_ERROR",
+					data: error
+				});
 			});
 	}
 }
