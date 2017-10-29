@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	HashRouter,
 	Route,
-	NavLink
+	NavLink,
+	Redirect
 }
 from 'react-router-dom';
 import PostMenu from './PostMenu';
@@ -51,6 +52,7 @@ export default class App extends React.Component {
         				</li>
         			</ul>
 					<div className="admin-contents">
+						<Redirect from="/" to="posts" />
 						<Route path="/posts" render={(props) => <PostMenu posts={this.props.posts}/>}/>
 						<Route path="/images" component={Images}/>
 						<Route path="/comments" component={Comments}/>
