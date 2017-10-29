@@ -5,11 +5,16 @@ import {
 from 'react-bootstrap';
 import ReactHtmlParser from 'react-html-parser';
 import styles from "./styles";
+import {
+	Route,
+	Link
+}
+from 'react-router-dom';
+import EditingPost from '../EditingPost';
 
 export default class PostsContainer extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log("PostsContainer this.props.posts", this.props.posts);
 	}
 
 	render() {
@@ -21,7 +26,9 @@ export default class PostsContainer extends React.Component {
 					<div>{(post.active === 0)?'NOT PUBLISHED':'Published On '+post.published_at.substr(0, 10)}, Written On {post.created_at.substr(0, 10)}</div>
 					<div style={styles.body}>{ReactHtmlParser(post.body)}</div>
 					<div style={{height:'20px'}}>
-						<button style={styles.button} className="btn btn-simple">Edit</button>
+						<Link to={'/posts/edit/'+post.id}>
+							<button style={styles.button} className="btn btn-simple">Edit</button>
+						</Link>
 						<button style={styles.button} className="btn btn-info">Preview</button>
 						<button style={styles.button} className="btn btn-danger">Delete</button>
 					</div>

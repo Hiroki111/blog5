@@ -26,7 +26,6 @@ export default class Posts extends React.Component {
 			<div>
 				<Switch>
 					<Route exact path="/posts" component={Top}/>
-					<Route path="/posts/new" component={EditingPost}/>
 				</Switch>
 			</div>
 		);

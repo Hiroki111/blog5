@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-	Route,
-	Link,
-	Switch
+	Link
 }
 from 'react-router-dom';
 import 'froala-editor/js/froala_editor.pkgd.min.js';
@@ -96,7 +94,7 @@ export default class EditingPost extends React.Component {
 	render() {
 		return (
 			<div>
-					<Link to="/posts">Return</Link>
+				<Link to="/posts">Return</Link>
 				<div style={styles.alartDiv}>
 		        	{this.state.success &&
 		        		<Alert bsStyle="success" style={styles.alart}>

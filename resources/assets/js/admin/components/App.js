@@ -10,6 +10,7 @@ import PostMenu from './PostMenu';
 import Images from './Images';
 import Comments from './Comments';
 import Stats from './Stats';
+import EditingPost from './EditingPost';
 import {
 	connect
 }
@@ -54,6 +55,8 @@ export default class App extends React.Component {
 					<div className="admin-contents">
 						<Redirect from="/" to="posts" />
 						<Route path="/posts" render={(props) => <PostMenu posts={this.props.posts}/>}/>
+						<Route path="/posts/new" component={EditingPost}/>
+						<Route path='/posts/edit/:postId' component={EditingPost}/>
 						<Route path="/images" component={Images}/>
 						<Route path="/comments" component={Comments}/>
 						<Route path="/stats" component={Stats}/>
