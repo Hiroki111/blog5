@@ -3,7 +3,8 @@ import {
 	HashRouter,
 	Route,
 	NavLink,
-	Redirect
+	Redirect,
+	Switch
 }
 from 'react-router-dom';
 import PostMenu from './PostMenu';
@@ -53,13 +54,15 @@ export default class App extends React.Component {
         				</li>
         			</ul>
 					<div className="admin-contents">
-						<Redirect from="/" to="posts" />
-						<Route path="/posts" render={(props) => <PostMenu posts={this.props.posts}/>}/>
-						<Route path="/posts/new" component={EditingPost}/>
-						<Route path='/posts/edit/:postId' component={EditingPost}/>
-						<Route path="/images" component={Images}/>
-						<Route path="/comments" component={Comments}/>
-						<Route path="/stats" component={Stats}/>
+						<Switch>
+							<Redirect exact from="/" to="posts/" />
+							<Route exact path="/posts/" render={(props) => <PostMenu posts={this.props.posts}/>}/>
+							<Route exact path="/posts/new" component={EditingPost}/>
+							<Route exact path='/posts/edit/:postId' component={EditingPost}/>
+							<Route exact path="/images" component={Images}/>
+							<Route exact path="/comments" component={Comments}/>
+							<Route exact path="/stats" component={Stats}/>
+						</Switch>
 					</div>
 				</div>
 			</HashRouter>

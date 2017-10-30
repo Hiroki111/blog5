@@ -3,8 +3,7 @@ import PostsContainer from '../PostsContainer/index.js';
 import EditingPost from '../EditingPost';
 import {
 	Route,
-	Link,
-	Switch
+	Link
 }
 from 'react-router-dom';
 
@@ -15,18 +14,12 @@ export default class Posts extends React.Component {
 	}
 
 	render() {
-		const Top = () => (
+
+		return (
 			<div>
 				<div><Link to="/posts/new">Add New Post</Link></div>
 				<div>Search Box here</div>
 				<div><PostsContainer posts={this.props.posts} /></div>
-			</div>
-		);
-		return (
-			<div>
-				<Switch>
-					<Route exact path="/posts" component={Top}/>
-				</Switch>
 			</div>
 		);
 	}
