@@ -18,6 +18,24 @@ export default function postReducer(state = {
 				}
 				break;
 			}
+		case "GET_POST":
+			{
+				return {
+					...state,
+					post: state.posts.find((post) => {
+						return post.id === action.data
+					}),
+				}
+				break;
+			}
+		case "SET_POST":
+			{
+				return {
+					...state,
+					post: action.data,
+				}
+				break;
+			}
 		case "FETCH_POSTS_ERROR":
 			{
 				return {
