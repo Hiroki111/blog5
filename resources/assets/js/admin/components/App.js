@@ -23,7 +23,8 @@ from '../actions/postActions';
 
 @connect((store) => {
 	return {
-		posts: store.post.posts
+		posts: store.post.posts,
+		form: store.form
 	};
 })
 export default class App extends React.Component {
