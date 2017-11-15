@@ -11,6 +11,10 @@ import * as postAction from '../../actions/postActions';
 import axios from 'axios';
 import Form from './form';
 import styles from './styles';
+import {
+	SubmissionError
+}
+from 'redux-form';
 
 @connect((store) => {
 	return {
@@ -30,12 +34,10 @@ export default class EditingPost extends React.Component {
 			'body': values.body,
 		}).then((response) => {
 			this.props.dispatch(postAction.addPost(response.data));
-			this.setState({
-				errorMessages: {},
-			});
 		}).catch((error) => {
-			this.setState({
-				errorMessages: error.response.data,
+			var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
+			throw new SubmissionError({
+				_error: messages
 			});
 		});
 	}

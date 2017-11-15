@@ -25,16 +25,25 @@ import styles from "./styles";
 class Form extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
 	}
 
 	render() {
 		const {
+			error,
 			handleSubmit
 		} = this.props;
 		return (
 			<div>
-				<form onSubmit={handleSubmit}>					
+				<form onSubmit={handleSubmit}>
+					<div style={styles.alartDiv}>
+	        			{error &&
+	        				<Alert bsStyle="danger" style={styles.alart}>
+          						<strong>Error</strong>
+          						{error.map((errorMessage, index)=><p key={index}>{errorMessage}</p>)}
+        					</Alert>
+	        			}
+	        			<div className="clearfix"></div>
+	    			</div>				
 	    			<div style={styles.divStyle}>
 	    				<div className="form-group" style={styles.divStyle}>
 							<Field name="title"
