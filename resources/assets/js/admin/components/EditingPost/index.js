@@ -28,6 +28,7 @@ export default class EditingPost extends React.Component {
 	}
 
 	onSubmit(values) {
+		console.log("onSubmit - values", values);
 		return axios.post('/posts', {
 			'active': (values.active) ? 1 : 0,
 			'title': values.title,

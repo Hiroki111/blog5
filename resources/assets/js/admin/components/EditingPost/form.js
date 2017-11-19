@@ -16,6 +16,7 @@ import {
 }
 from 'redux-form';
 import styles from "./styles";
+import RichTextMarkdown from './rte';
 
 @connect((store) => {
 	return {
@@ -55,8 +56,10 @@ class Form extends React.Component {
 		        		</div>
 		        	</div>
 					<div style={styles.divStyle}>
-						<Field name="body"
-							component="textarea" />
+						<Field id="body"
+							name="body"
+							component={RichTextMarkdown}
+						/>
 					</div>
 					<div>
 						<div style={styles.publishDiv} className="checkbox">
