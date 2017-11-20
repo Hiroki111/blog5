@@ -1,23 +1,25 @@
 import React from 'react';
 import RichTextEditor from 'react-rte';
+import PropTypes from 'prop-types';
 
 class RichTextMarkdown extends React.Component {
+  static propTypes = {
+    input: PropTypes.shape({
+      onChange: PropTypes.func.isRequired,
+      value: PropTypes.string
+    }).isRequired
+  }
+
   constructor(props) {
     super(props)
+    this.RichTextEditor = RichTextEditor;
     this.state = {
-      value: undefined
+      value: this.props.input.value ?
+        this.RichTextEditor.createValueFromString(this.props.input.value, 'markdown') : this.RichTextEditor.createEmptyValue()
     }
   }
 
-  componentDidMount() {
-    this.RichTextEditor = RichTextEditor
-    this.setState({
-      value: this.props.input.value ?
-        this.RichTextEditor.createValueFromString(this.props.input.value, 'markdown') : this.RichTextEditor.createEmptyValue()
-    })
-  }
-
-  handleChange = value => {
+  handleChange = (value) => {
     this.setState({
       value
     })

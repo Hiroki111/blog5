@@ -3,13 +3,10 @@ import {
 	connect
 }
 from 'react-redux';
-import * as postAction from '../../actions/postActions';
-import axios from 'axios';
 import {
 	Alert
 }
 from 'react-bootstrap';
-import lodash from 'lodash';
 import {
 	Field,
 	reduxForm
