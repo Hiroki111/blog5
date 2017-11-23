@@ -15,6 +15,10 @@ import {
 	SubmissionError
 }
 from 'redux-form';
+import {
+	getPost
+}
+from '../../actions/postActions';
 
 @connect((store) => {
 	return {
@@ -27,8 +31,12 @@ export default class EditingPost extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
+	componentWillMount() {
+		const id = this.props.match.params.postId;
+		this.props.dispatch(getPost(parseInt(id)));
+	}
+
 	onSubmit(values) {
-		console.log("onSubmit - values", values);
 		return axios.post('/posts', {
 			'active': (values.active) ? 1 : 0,
 			'title': values.title,

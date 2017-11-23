@@ -79,7 +79,15 @@ class Form extends React.Component {
 }
 
 Form = reduxForm({
-	form: 'Form'
+	form: 'Form',
+	enableReinitialize: true,
 })(Form);
+
+Form = connect(
+	state => ({
+		initialValues: state.post.post,
+		enableReinitialize: true,
+	}),
+)(Form)
 
 export default Form;
