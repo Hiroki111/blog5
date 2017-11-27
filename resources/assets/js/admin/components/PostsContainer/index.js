@@ -18,15 +18,18 @@ export default class PostsContainer extends React.Component {
 	}
 
 	render() {
-		var panels = [];
-		this.props.posts.forEach((post) => {
+		const panels = [];
+		const {
+			posts
+		} = this.props;
+		Object.keys(posts).forEach((id) => {
 			panels.push(
-				<Panel key={post.id} style={styles.panel}>
-					<h3 style={styles.title}>{post.title}</h3>
-					<div>{(post.active === 0)?'NOT PUBLISHED':'Published On '+post.published_at.substr(0, 10)}, Written On {post.created_at.substr(0, 10)}</div>
-					<div style={styles.body}>{ReactHtmlParser(post.body)}</div>
+				<Panel key={id} style={styles.panel}>
+					<h3 style={styles.title}>{posts[id].title}</h3>
+					<div>{(posts[id].active === 0)?'NOT PUBLISHED':'Published On '+posts[id].published_at.substr(0, 10)}, Written On {posts[id].created_at.substr(0, 10)}</div>
+					<div style={styles.body}>{ReactHtmlParser(posts[id].body)}</div>
 					<div style={{height:'20px'}}>
-						<Link to={'/posts/edit/'+post.id}>
+						<Link to={'/posts/edit/'+id}>
 							<button style={styles.button} className="btn btn-simple">Edit</button>
 						</Link>
 						<button style={styles.button} className="btn btn-info">Preview</button>
@@ -35,7 +38,6 @@ export default class PostsContainer extends React.Component {
 				</Panel>
 			);
 		});
-
 		return (
 			<div>
 				{panels}

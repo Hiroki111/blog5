@@ -7,7 +7,6 @@ import {
 	Link
 }
 from 'react-router-dom';
-import * as postAction from '../../actions/postActions';
 import axios from 'axios';
 import Form from './form';
 import styles from './styles';
@@ -16,7 +15,13 @@ import {
 }
 from 'redux-form';
 import {
-	getPost
+	addPost,
+	addPostFulfilled,
+	addPostRejected,
+	getPost,
+	updatePost,
+	updatePostRejected,
+	resetPost
 }
 from '../../actions/postActions';
 
@@ -33,29 +38,35 @@ export default class EditingPost extends React.Component {
 
 	componentWillMount() {
 		const id = this.props.match.params.postId;
-		this.props.dispatch(getPost(parseInt(id)));
+
+		if (id)
+			this.props.dispatch(getPost(Number(id)));
+		else
+			this.props.dispatch(resetPost());
 	}
 
-	onSubmit(values) {
-		return axios.post('/posts', {
-			'active': (values.active) ? 1 : 0,
-			'title': values.title,
-			'body': values.body,
-		}).then((response) => {
-			this.props.dispatch(postAction.addPost(response.data));
-		}).catch((error) => {
-			var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
-			throw new SubmissionError({
-				_error: messages
+	onSubmit(data) {
+		data.active = (data.active) ? 1 : 0;
+
+    	if (!data.hasOwnProperty("id")) {
+			return this.props.dispatch(addPost(data)).data.then((result) => {
+				this.props.dispatch(addPostFulfilled(result.data));
+			}).catch((error) => {
+				console.log("error - onSubmit", error, error.response);
+				this.props.dispatch(addPostRejected());
+				var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
+				throw new SubmissionError({
+					_error: messages
+				});
 			});
-		});
+		}
 	}
 
 	render() {
 		return (
 			<div>
 				<Link to="/posts">Return</Link>
-				<Form onSubmit={values=> this.onSubmit(values)}/>
+				<Form onSubmit={data=> this.onSubmit(data)}/>
 			</div>
 		);
 	}

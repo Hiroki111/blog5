@@ -10,7 +10,6 @@ from 'react-router-dom';
 export default class Posts extends React.Component {
 	constructor(props) {
 		super(props);
-		console.log("this.props.posts", this.props.posts);
 	}
 
 	render() {
