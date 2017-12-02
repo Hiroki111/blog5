@@ -24,6 +24,10 @@ import {
 	resetPost
 }
 from '../../actions/postActions';
+import {
+	notify
+}
+from 'react-notify-toast';
 
 @connect((store) => {
 	return {
@@ -47,12 +51,12 @@ export default class EditingPost extends React.Component {
 
 	onSubmit(data) {
 		data.active = (data.active) ? 1 : 0;
-
-    	if (!data.hasOwnProperty("id")) {
+		if (!data.hasOwnProperty("id")) {
 			return this.props.dispatch(addPost(data)).data.then((result) => {
+				notify.show('Saved', 'success', 2000);
 				this.props.dispatch(addPostFulfilled(result.data));
+				this.props.history.push('/posts')
 			}).catch((error) => {
-				console.log("error - onSubmit", error, error.response);
 				this.props.dispatch(addPostRejected());
 				var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
 				throw new SubmissionError({

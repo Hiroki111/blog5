@@ -20,6 +20,7 @@ import {
 	fetchPosts
 }
 from '../actions/postActions';
+import Notifications from 'react-notify-toast';
 
 @connect((store) => {
 	return {
@@ -38,35 +39,38 @@ export default class App extends React.Component {
 
 	render() {
 		return (
-			<HashRouter>
-				<div style={{'marginTop':"30px", 'marginLeft':'10px'}}>
-					<ul className="sidebar">
-        				<li className="sidebar-list">
-        					<NavLink to="/posts" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Posts</NavLink>
-        				</li>
-        				<li className="sidebar-list">
-        					<NavLink to="/images" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Images</NavLink>
-        				</li>
-        				<li className="sidebar-list">
-        					<NavLink to="/comments" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Comments</NavLink>
-        				</li>
-        				<li className="sidebar-list">
-        					<NavLink to="/stats" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Stats</NavLink>
-        				</li>
-        			</ul>
-					<div className="admin-contents">
-						<Switch>
-							<Redirect exact from="/" to="posts/" />
-							<Route exact path="/posts/" render={(props) => <PostMenu posts={this.props.posts}/>}/>
-							<Route path="/posts/new" component={EditingPost}/>
-							<Route exact path='/posts/edit/:postId?' component={EditingPost}/>
-							<Route exact path="/images" component={Images}/>
-							<Route exact path="/comments" component={Comments}/>
-							<Route exact path="/stats" component={Stats}/>
-						</Switch>
+			<div>
+				<Notifications />
+				<HashRouter>
+					<div style={{'marginTop':"30px", 'marginLeft':'10px'}}>
+						<ul className="sidebar">
+        					<li className="sidebar-list">
+        						<NavLink to="/posts" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Posts</NavLink>
+        					</li>
+        					<li className="sidebar-list">
+        						<NavLink to="/images" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Images</NavLink>
+        					</li>
+        					<li className="sidebar-list">
+        						<NavLink to="/comments" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Comments</NavLink>
+        					</li>
+        					<li className="sidebar-list">
+        						<NavLink to="/stats" style={{ textDecoration: 'none' }} activeStyle={{ color: 'red' }} replace>Stats</NavLink>
+        					</li>
+        				</ul>
+						<div className="admin-contents">
+							<Switch>
+								<Redirect exact from="/" to="posts/" />
+								<Route exact path="/posts/" render={(props) => <PostMenu posts={this.props.posts}/>}/>
+								<Route path="/posts/new" component={EditingPost}/>
+								<Route exact path='/posts/edit/:postId?' component={EditingPost}/>
+								<Route exact path="/images" component={Images}/>
+								<Route exact path="/comments" component={Comments}/>
+								<Route exact path="/stats" component={Stats}/>
+							</Switch>
+						</div>
 					</div>
-				</div>
-			</HashRouter>
+				</HashRouter>
+			</div>
 		);
 	}
 }
