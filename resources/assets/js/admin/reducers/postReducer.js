@@ -58,11 +58,59 @@ export default function postReducer(state = {
 				break;
 			}
 
+		case "UPDATE_POST":
+			{
+				return {
+					...state,
+					loading: true
+				}
+				break;
+			}
+		case "UPDATE_POST_FULFILLED":
+			{
+				return {
+					...state,
+					posts: {
+						...state.posts,
+						[action.data.id]: action.data
+					},
+					loading: false
+				}
+				break;
+			}
+		case "UPDATE_POST_REJECTED":
+			{
+				return {
+					...state,
+					loading: false
+				}
+				break;
+			}
+
 		case "GET_POST":
 			{
 				return {
 					...state,
-					post: state.posts[action.data]
+					loading: true
+				}
+				break;
+			}
+
+		case "GET_POST_FULFILLED":
+			{
+				return {
+					...state,
+					post: action.data,
+					loading: false
+				}
+				break;
+			}
+
+		case "GET_POST_REJECTED":
+			{
+				return {
+					...state,
+					loading: false
 				}
 				break;
 			}

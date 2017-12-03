@@ -51,31 +51,56 @@ export function addPostRejected(error) {
 	};
 }
 
-export function updatePost(values) {
+export function updatePost(id, values) {
+	const request = axios({
+		method: 'put',
+		data: values,
+		url: '/posts/' + id,
+	});
+
 	return {
-		type: ADD_POST,
+		type: "UPDATE_POST",
 		data: request
 	};
 }
 
-export function updatePostSucess(newPost) {
+export function updatePostFulfilled(post) {
 	return {
-		type: ADD_POST_SUCCESS,
-		data: newPost
+		type: "UPDATE_POST_FULFILLED",
+		data: post
 	};
 }
 
 export function updatePostRejected(error) {
 	return {
-		type: ADD_POST_ERROR,
+		type: "UPDATE_POST_REJECTED",
 		data: error
 	};
 }
 
 export function getPost(id) {
+	const request = axios({
+		method: 'get',
+		url: '/posts/' + id,
+	});
+
 	return {
 		type: "GET_POST",
-		data: id,
+		data: request
+	};
+}
+
+export function getPostFulfilled(post) {
+	return {
+		type: "GET_POST_FULFILLED",
+		data: post
+	};
+}
+
+export function getPostRejected(error) {
+	return {
+		type: "GET_POST_REJECTED",
+		data: error
 	};
 }
 
