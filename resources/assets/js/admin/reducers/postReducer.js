@@ -6,14 +6,16 @@ export default function postReducer(state = {
 	switch (action.type) {
 		case "FETCH_POSTS":
 			{
-				return {...state,
+				return {
+					...state,
 					loading: true
 				}
 				break;
 			}
 		case "FETCH_POSTS_FULFILLED":
 			{
-				return {...state,
+				return {
+					...state,
 					posts: action.data,
 					loading: false
 				}
@@ -21,7 +23,8 @@ export default function postReducer(state = {
 			}
 		case "FETCH_POSTS_REJECTED":
 			{
-				return {...state,
+				return {
+					...state,
 					loading: false
 				}
 				break;

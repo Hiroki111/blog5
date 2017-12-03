@@ -15,7 +15,7 @@ class RichTextMarkdown extends React.Component {
     this.RichTextEditor = RichTextEditor;
     this.state = {
       value: this.props.input.value ?
-        this.RichTextEditor.createValueFromString(this.props.input.value, 'markdown') : this.RichTextEditor.createEmptyValue()
+        this.RichTextEditor.createValueFromString(this.props.input.value, 'html') : this.RichTextEditor.createEmptyValue()
     }
   }
 
@@ -23,7 +23,7 @@ class RichTextMarkdown extends React.Component {
     const isPristine = nextProps.meta.pristine;
     if (nextProps.input.value && isPristine) {
       this.setState({
-        value: this.RichTextEditor.createValueFromString(nextProps.input.value, 'markdown')
+        value: this.RichTextEditor.createValueFromString(nextProps.input.value, 'html')
       });
     }
   }
@@ -31,12 +31,9 @@ class RichTextMarkdown extends React.Component {
   handleChange = (value) => {
     this.setState({
       value
-    })
-    let markdown = value.toString('markdown')
-    if (markdown.length === 2 && markdown.charCodeAt(0) === 8203 && markdown.charCodeAt(1) === 10) {
-      markdown = ''
-    }
-    this.props.input.onChange(markdown)
+    });
+
+    this.props.input.onChange(value.toString('html'));
   }
 
   render() {

@@ -37,7 +37,11 @@ export default class App extends React.Component {
 
 	componentWillMount() {
 		this.props.dispatch(fetchPosts()).data.then((result) => {
-			this.props.dispatch(fetchPostsFulfilled(result.data));
+			const posts = {};
+			result.data.forEach((post) => {
+				posts[post.id] = post;
+			});
+			this.props.dispatch(fetchPostsFulfilled(posts));
 		}).catch((error) => {
 			this.props.dispatch(fetchPostsRejected(error));
 		});

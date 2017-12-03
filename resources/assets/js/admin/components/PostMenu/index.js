@@ -13,7 +13,6 @@ export default class Posts extends React.Component {
 	}
 
 	render() {
-
 		return (
 			<div>
 				<div><Link to="/posts/new">Add New Post</Link></div>

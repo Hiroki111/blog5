@@ -19,9 +19,7 @@ export default class PostsContainer extends React.Component {
 
 	render() {
 		const panels = [];
-		const {
-			posts
-		} = this.props;
+		const posts = this.props.posts;
 		Object.keys(posts).forEach((id) => {
 			panels.push(
 				<Panel key={id} style={styles.panel}>
