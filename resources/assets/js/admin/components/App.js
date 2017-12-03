@@ -23,10 +23,15 @@ import {
 }
 from '../actions/postActions';
 import Notifications from 'react-notify-toast';
+import {
+	PulseLoader
+}
+from 'react-spinners';
 
 @connect((store) => {
 	return {
 		posts: store.post.posts,
+		loading: store.post.loading,
 		form: store.form
 	};
 })
@@ -50,6 +55,9 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div>
+				<div className='sweet-loading loading-bar'>
+        			<PulseLoader color={'#123abc'} loading={this.props.loading} size={30} />
+      			</div>
 				<Notifications />
 				<HashRouter>
 					<div style={{'marginTop':"30px", 'marginLeft':'10px'}}>

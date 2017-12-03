@@ -63,7 +63,7 @@ export default class EditingPost extends React.Component {
 		data.active = (data.active) ? 1 : 0;
 		if (!data.hasOwnProperty("id")) {
 			return this.props.dispatch(addPost(data)).data.then((result) => {
-				notify.show('Saved', 'success', 2000);
+				notify.show('Saved', 'success', 20000);
 				this.props.dispatch(addPostFulfilled(result.data));
 				this.props.history.push('/posts')
 			}).catch((error) => {
