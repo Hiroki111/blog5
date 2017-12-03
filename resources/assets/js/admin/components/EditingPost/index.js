@@ -19,9 +19,13 @@ import {
 	addPostFulfilled,
 	addPostRejected,
 	getPost,
+	getPostFulfilled,
+	getPostRejected,
 	updatePost,
+	updatePostFulfilled,
 	updatePostRejected,
-	resetPost
+	resetPost,
+	fetchPostIfNeeded
 }
 from '../../actions/postActions';
 import {
@@ -38,15 +42,21 @@ export default class EditingPost extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onSubmit = this.onSubmit.bind(this);
+
 	}
 
 	componentWillMount() {
-		const id = this.props.match.params.postId;
+		let id = this.props.match.params.postId;
 
-		if (id)
-			this.props.dispatch(getPost(Number(id)));
-		else
-			this.props.dispatch(resetPost());
+		if (!id) this.props.dispatch(resetPost());
+		else {
+			id = Number(id);
+			this.props.dispatch(getPost(id)).data.then((result) => {
+				this.props.dispatch(getPostFulfilled(result.data));
+			}).catch((error) => {
+				this.props.dispatch(getPostRejected(error));
+			});
+		}
 	}
 
 	onSubmit(data) {
@@ -64,6 +74,17 @@ export default class EditingPost extends React.Component {
 				});
 			});
 		}
+		return this.props.dispatch(updatePost(data.id, data)).data.then((result) => {
+			notify.show('Saved', 'success', 2000);
+			this.props.dispatch(updatePostFulfilled(result.data));
+			this.props.history.push('/posts')
+		}).catch((error) => {
+			this.props.dispatch(updatePostRejected(error));
+			var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
+			throw new SubmissionError({
+				_error: messages
+			});
+		});
 	}
 
 	render() {
