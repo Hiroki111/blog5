@@ -17,7 +17,9 @@ import {
 }
 from 'react-redux';
 import {
-	fetchPosts
+	fetchPosts,
+	fetchPostsFulfilled,
+	fetchPostsRejected
 }
 from '../actions/postActions';
 import Notifications from 'react-notify-toast';
@@ -34,7 +36,11 @@ export default class App extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.dispatch(fetchPosts());
+		this.props.dispatch(fetchPosts()).data.then((result) => {
+			this.props.dispatch(fetchPostsFulfilled(result.data));
+		}).catch((error) => {
+			this.props.dispatch(fetchPostsRejected(error));
+		});
 	}
 
 	render() {

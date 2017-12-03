@@ -6,33 +6,29 @@ export default function postReducer(state = {
 	switch (action.type) {
 		case "FETCH_POSTS":
 			{
-				return {
-					...state,
+				return {...state,
 					loading: true
 				}
 				break;
 			}
-		case "FETCH_POSTS_SUCCESS":
+		case "FETCH_POSTS_FULFILLED":
 			{
-				return {
-					...state,
+				return {...state,
 					posts: action.data,
 					loading: false
 				}
 				break;
 			}
-		case "FETCH_POSTS_ERROR":
+		case "FETCH_POSTS_REJECTED":
 			{
-				return {
-					...state,
+				return {...state,
 					loading: false
 				}
 				break;
 			}
 		case "ADD_POST":
 			{
-				return {
-					...state,
+				return {...state,
 					loading: true
 				}
 				break;
@@ -41,8 +37,7 @@ export default function postReducer(state = {
 			{
 				return {
 					...state,
-					posts: {
-						...state.posts,
+					posts: {...state.posts,
 						[action.data.id]: action.data
 					},
 					loading: false

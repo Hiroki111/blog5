@@ -1,27 +1,29 @@
 import axios from "axios";
 
 export function fetchPosts() {
-	return (dispatch) => {
-		dispatch({
-			type: "FETCH_POSTS"
-		});
-		axios.get('/posts')
-			.then((response) => {
-				const posts = {};
-				response.data.forEach((post) => {
-					posts[post.id] = post
-				});
-				dispatch({
-					type: "FETCH_POSTS_SUCCESS",
-					data: posts
-				});
-			}).catch((error) => {
-				dispatch({
-					type: "FETCH_POSTS_ERROR",
-					data: error
-				});
-			});
-	}
+	const request = axios({
+		method: 'get',
+		url: '/posts',
+	});
+
+	return {
+		type: "FETCH_POSTS",
+		data: request
+	};
+}
+
+export function fetchPostsFulfilled(posts) {
+	return {
+		type: "FETCH_POSTS_FULFILLED",
+		data: posts
+	};
+}
+
+export function fetchPostsRejected(error) {
+	return {
+		type: "FETCH_POSTS_REJECTED",
+		data: error
+	};
 }
 
 export function addPost(values) {
