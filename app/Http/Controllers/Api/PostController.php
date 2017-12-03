@@ -61,7 +61,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->post->find($id);
     }
 
     /**
@@ -85,7 +85,13 @@ class PostController extends Controller
     public function update(StorePost $request, $id)
     {
         $post = $this->post->find($id);
-        $post->update($request->all());
+        $post->update([
+            'title'        => $this->request->input('title'),
+            'active'       => $this->request->input('active'),
+            'body'         => $this->request->input('body'),
+            'user_id'      => Auth::id(),
+            'published_at' => ($this->request->input('active') > 0) ? Carbon::now() : null,
+        ]);
         return $post;
     }
 
