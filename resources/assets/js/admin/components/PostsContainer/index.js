@@ -11,10 +11,33 @@ import {
 }
 from 'react-router-dom';
 import EditingPost from '../EditingPost';
+import {
+	connect
+}
+from 'react-redux';
+import {
+	deletePost,
+	deletePostFulfilled,
+	deletePostRejected
+}
+from '../../actions/postActions';
 
+@connect((store) => {
+	return {
+		post: store.post.post
+	};
+})
 export default class PostsContainer extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+	onPressDelete(id) {
+		this.props.dispatch(deletePost(id)).data.then((result) => {
+			this.props.dispatch(deletePostFulfilled(id));
+		}).catch((error) => {
+			this.props.dispatch(deletePostRejected(error));
+		});
 	}
 
 	render() {
@@ -31,7 +54,10 @@ export default class PostsContainer extends React.Component {
 							<button style={styles.button} className="btn btn-simple">Edit</button>
 						</Link>
 						<button style={styles.button} className="btn btn-info">Preview</button>
-						<button style={styles.button} className="btn btn-danger">Delete</button>
+						<button 
+							style={styles.button}
+							className="btn btn-danger"
+							onClick={this.onPressDelete.bind(this,id)}>Delete</button>
 					</div>
 				</Panel>
 			);

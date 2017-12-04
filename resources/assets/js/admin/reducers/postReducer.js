@@ -84,7 +84,6 @@ export default function postReducer(state = {
 				}
 				break;
 			}
-
 		case "GET_POST":
 			{
 				return {
@@ -112,6 +111,39 @@ export default function postReducer(state = {
 				}
 				break;
 			}
+
+		case "DELETE_POST":
+			{
+				return {
+					...state,
+					loading: true
+				}
+				break;
+			}
+
+		case "DELETE_POST_FULFILLED":
+			{
+				const {
+					[action.data]: omit, ...posts
+				} = state.posts
+
+				return {
+					...state,
+					posts: posts,
+					loading: false
+				}
+				break;
+			}
+
+		case "DELETE_POST_REJECTED":
+			{
+				return {
+					...state,
+					loading: false
+				}
+				break;
+			}
+
 		case "RESET_POST":
 			{
 				return {

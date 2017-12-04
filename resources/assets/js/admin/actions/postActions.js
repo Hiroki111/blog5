@@ -106,16 +106,35 @@ export function getPostRejected(error) {
 	};
 }
 
+export function deletePost(id) {
+	const request = axios({
+		method: 'delete',
+		url: '/posts/' + id,
+	});
+
+	return {
+		type: "DELETE_POST",
+		data: request
+	};
+}
+
+export function deletePostFulfilled(id) {
+	return {
+		type: "DELETE_POST_FULFILLED",
+		data: id
+	};
+}
+
+export function deletePostRejected(error) {
+	return {
+		type: "DELETE_POST_REJECTED",
+		data: error
+	};
+}
+
 export function resetPost() {
 	return {
 		type: "RESET_POST",
 		data: {}
 	}
-}
-
-export function deletePost(id) {
-	return {
-		type: "DELETE_POST",
-		data: id,
-	};
 }
