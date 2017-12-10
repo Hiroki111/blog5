@@ -21,7 +21,7 @@ import {
 	deletePostRejected
 }
 from '../../actions/postActions';
-import ConfirmService from '../../services/ConfirmService';
+import ConfirmationService from '../../services/ConfirmationService';
 import ReactDOM from 'react-dom';
 
 @connect((store) => {
@@ -35,8 +35,7 @@ export default class PostsContainer extends React.Component {
 	}
 
 	onPressDelete(id) {
-		ConfirmService('Do you really wish to delete this post?').then((result) => {
-			console.log("yes");
+		ConfirmationService('Do you really wish to delete this post?').then((result) => {
 			this.props.dispatch(deletePost(id)).data.then((result) => {
 				this.props.dispatch(deletePostFulfilled(id));
 			}).catch((error) => {
@@ -45,7 +44,6 @@ export default class PostsContainer extends React.Component {
 		}, (cancel) => {
 			console.log("cancled");
 		});
-
 	}
 
 	render() {

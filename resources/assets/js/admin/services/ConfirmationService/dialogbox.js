@@ -27,8 +27,8 @@ class DialogBox extends React.Component {
             {confirmation}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={cancel}>NO</Button>
-            <Button className='button-l' bsStyle="primary" onClick={proceed}>YES</Button>
+            <Button className='button-l' bsStyle="info" onClick={proceed}>YES</Button>
+            <Button className='button-l' bsStyle="default" onClick={cancel}>NO</Button>
           </Modal.Footer>
         </Modal>
       </div>
