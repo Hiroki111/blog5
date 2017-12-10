@@ -20,5 +20,8 @@ export default {
 		marginTop: '0',
 		fontFamily: 'Times New Roman',
 		fontWeight: 'bold'
+	},
+	searchBox: {
+		width: '1000px'
 	}
 };

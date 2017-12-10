@@ -31,6 +31,9 @@ import ReactDOM from 'react-dom';
 export default class PostList extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			searchBox: ""
+		}
 	}
 
 	onPressDelete(id) {
@@ -40,6 +43,14 @@ export default class PostList extends React.Component {
 			}).catch((error) => {
 				this.props.dispatch(deletePostRejected(error));
 			});
+		});
+	}
+
+	handleChange(event) {
+		this.setState({
+			searchBox: event.target.value
+		}, () => {
+			console.log("handleChange", this.state);
 		});
 	}
 
@@ -67,6 +78,16 @@ export default class PostList extends React.Component {
 		});
 		return (
 			<div>
+				<div>
+					<input
+						style={styles.searchBox}
+						type="text"
+						name="searchBox"
+						value={this.state.searchBox}
+						onChange={this.handleChange.bind(this)}
+						className="form-control"
+						placeholder="Enter to search..." />
+				</div>
 				{panels}
 			</div>
 		);
