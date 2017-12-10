@@ -1,5 +1,5 @@
 import React from 'react';
-import PostsContainer from '../PostsContainer/index.js';
+import PostList from '../PostList/index.js';
 import {
 	Route,
 	Link
@@ -16,7 +16,7 @@ export default class Posts extends React.Component {
 			<div>
 				<div><Link to="/posts/new">Add New Post</Link></div>
 				<div>Search Box here</div>
-				<div><PostsContainer posts={this.props.posts} /></div>
+				<div><PostList posts={this.props.posts} /></div>
 			</div>
 		);
 	}

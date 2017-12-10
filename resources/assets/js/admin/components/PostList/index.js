@@ -28,7 +28,7 @@ import ReactDOM from 'react-dom';
 		post: store.post.post
 	};
 })
-export default class PostsContainer extends React.Component {
+export default class PostList extends React.Component {
 	constructor(props) {
 		super(props);
 	}
