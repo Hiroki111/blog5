@@ -41,8 +41,6 @@ export default class PostsContainer extends React.Component {
 			}).catch((error) => {
 				this.props.dispatch(deletePostRejected(error));
 			});
-		}, (cancel) => {
-			console.log("cancled");
 		});
 	}
 
