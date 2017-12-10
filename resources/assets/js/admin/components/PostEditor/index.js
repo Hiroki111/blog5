@@ -38,7 +38,7 @@ from 'react-notify-toast';
 		post: store.post.post
 	};
 })
-export default class EditingPost extends React.Component {
+export default class PostEditor extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onSubmit = this.onSubmit.bind(this);

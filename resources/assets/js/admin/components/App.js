@@ -11,7 +11,7 @@ import PostMenu from './PostMenu';
 import Images from './Images';
 import Comments from './Comments';
 import Stats from './Stats';
-import EditingPost from './EditingPost';
+import PostEditor from './PostEditor';
 import {
 	connect
 }
@@ -79,8 +79,8 @@ export default class App extends React.Component {
 							<Switch>
 								<Redirect exact from="/" to="posts/" />
 								<Route exact path="/posts/" render={(props) => <PostMenu posts={this.props.posts}/>}/>
-								<Route path="/posts/new" component={EditingPost}/>
-								<Route exact path='/posts/edit/:postId?' component={EditingPost}/>
+								<Route path="/posts/new" component={PostEditor}/>
+								<Route exact path='/posts/edit/:postId?' component={PostEditor}/>
 								<Route exact path="/images" component={Images}/>
 								<Route exact path="/comments" component={Comments}/>
 								<Route exact path="/stats" component={Stats}/>

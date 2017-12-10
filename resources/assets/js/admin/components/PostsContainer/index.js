@@ -10,7 +10,6 @@ import {
 	Link
 }
 from 'react-router-dom';
-import EditingPost from '../EditingPost';
 import {
 	connect
 }

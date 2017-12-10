@@ -1,6 +1,5 @@
 import React from 'react';
 import PostsContainer from '../PostsContainer/index.js';
-import EditingPost from '../EditingPost';
 import {
 	Route,
 	Link
