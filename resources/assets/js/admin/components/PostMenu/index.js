@@ -14,8 +14,8 @@ export default class Posts extends React.Component {
 	render() {
 		return (
 			<div>
-				<div><Link to="/posts/new">Add New Post</Link></div>
-				<div><PostList posts={this.props.posts} /></div>
+				<Link to="/posts/new">Add New Post</Link>
+				<PostList posts={this.props.posts} />
 			</div>
 		);
 	}

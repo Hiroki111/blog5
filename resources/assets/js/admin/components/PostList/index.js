@@ -22,6 +22,7 @@ import {
 from '../../actions/postActions';
 import ConfirmationService from '../../services/ConfirmationService';
 import ReactDOM from 'react-dom';
+import lodash from 'lodash';
 
 @connect((store) => {
 	return {
@@ -49,20 +50,24 @@ export default class PostList extends React.Component {
 	handleChange(event) {
 		this.setState({
 			searchBox: event.target.value
-		}, () => {
-			console.log("handleChange", this.state);
 		});
 	}
 
 	render() {
 		const panels = [];
-		const posts = this.props.posts;
-		Object.keys(posts).forEach((id) => {
+		const ids = Object.keys(this.props.posts).filter((id) => {
+			return (this.props.posts[id].title.indexOf(this.state.searchBox) > -1 || this.props.posts[id].body.indexOf(this.state.searchBox) > -1);
+		});
+
+		ids.forEach((id) => {
 			panels.push(
 				<Panel key={id} style={styles.panel}>
-					<h3 style={styles.title}>{posts[id].title}</h3>
-					<div>{(posts[id].active === 0)?'NOT PUBLISHED':'Published On '+posts[id].published_at.substr(0, 10)}, Written On {posts[id].created_at.substr(0, 10)}</div>
-					<div style={styles.body}>{ReactHtmlParser(posts[id].body)}</div>
+					<h3 style={styles.title}>{this.props.posts[id].title}</h3>
+					<div>{(this.props.posts[id].active === 0) ?
+						'NOT PUBLISHED':
+						'Published On '+this.props.posts[id].published_at.substr(0, 10)}, Written On {this.props.posts[id].created_at.substr(0, 10)}
+					</div>
+					<div style={styles.body}>{ReactHtmlParser(this.props.posts[id].body)}</div>
 					<div style={{height:'20px'}}>
 						<Link to={'/posts/edit/'+id}>
 							<button style={styles.button} className="btn btn-simple">Edit</button>
