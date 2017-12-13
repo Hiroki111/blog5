@@ -24,8 +24,7 @@ import {
 	updatePost,
 	updatePostFulfilled,
 	updatePostRejected,
-	resetPost,
-	fetchPostIfNeeded
+	resetPost
 }
 from '../../actions/postActions';
 import {

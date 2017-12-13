@@ -1,6 +1,6 @@
 export default function postReducer(state = {
 	post: {},
-	posts: {},
+	posts: [],
 	loading: false,
 }, action) {
 	switch (action.type) {
@@ -40,9 +40,9 @@ export default function postReducer(state = {
 			{
 				return {
 					...state,
-					posts: {...state.posts,
-						[action.data.id]: action.data
-					},
+					posts: [
+						...state.posts,action.data
+					],
 					loading: false
 				}
 				break;
@@ -68,10 +68,14 @@ export default function postReducer(state = {
 			{
 				return {
 					...state,
-					posts: {
-						...state.posts,
-						[action.data.id]: action.data
-					},
+					posts:state.posts.map((post)=> {
+						if (post.id === action.data.id) {
+							return action.data;
+						}
+						else {
+							return post;
+						}
+					}),
 					loading: false
 				}
 				break;
@@ -123,14 +127,12 @@ export default function postReducer(state = {
 
 		case "DELETE_POST_FULFILLED":
 			{
-				const {
-					[action.data]: omit, ...posts
-				} = state.posts
-
 				return {
 					...state,
-					posts: posts,
-					loading: false
+					posts: state.posts.filter(function(post) {
+						return post.id != action.data;
+					}),
+  					loading: false
 				}
 				break;
 			}

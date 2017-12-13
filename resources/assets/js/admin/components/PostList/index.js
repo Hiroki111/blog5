@@ -44,7 +44,7 @@ export default class PostList extends React.Component {
 			}).catch((error) => {
 				this.props.dispatch(deletePostRejected(error));
 			});
-		});
+		},(cancel) => {});
 	}
 
 	handleChange(event) {
@@ -55,28 +55,31 @@ export default class PostList extends React.Component {
 
 	render() {
 		const panels = [];
-		const ids = Object.keys(this.props.posts).filter((id) => {
-			return (this.props.posts[id].title.indexOf(this.state.searchBox) > -1 || this.props.posts[id].body.indexOf(this.state.searchBox) > -1);
+		const posts = this.props.posts.filter((post)=>{
+			return (post.title.includes(this.state.searchBox) || post.body.includes(this.state.searchBox));
 		});
 
-		ids.forEach((id) => {
+		posts.forEach((post) => {
 			panels.push(
-				<Panel key={id} style={styles.panel}>
-					<h3 style={styles.title}>{this.props.posts[id].title}</h3>
-					<div>{(this.props.posts[id].active === 0) ?
+				<Panel key={post.id} style={styles.panel}>
+					<h3 style={styles.title}>{post.title}</h3>
+					<div>
+					{
+						(post.active === 0) ?
 						'NOT PUBLISHED':
-						'Published On '+this.props.posts[id].published_at.substr(0, 10)}, Written On {this.props.posts[id].created_at.substr(0, 10)}
+						'Published On '+post.published_at.substr(0, 10)+', Written On'+ post.created_at.substr(0, 10)
+					}
 					</div>
-					<div style={styles.body}>{ReactHtmlParser(this.props.posts[id].body)}</div>
+					<div style={styles.body}>{ReactHtmlParser(post.body)}</div>
 					<div style={{height:'20px'}}>
-						<Link to={'/posts/edit/'+id}>
+						<Link to={'/posts/edit/'+post.id}>
 							<button style={styles.button} className="btn btn-simple">Edit</button>
 						</Link>
 						<button style={styles.button} className="btn btn-info">Preview</button>
 						<button 
 							style={styles.button}
 							className="btn btn-danger"
-							onClick={this.onPressDelete.bind(this,id)}>Delete</button>
+							onClick={this.onPressDelete.bind(this,post.id)}>Delete</button>
 					</div>
 				</Panel>
 			);
