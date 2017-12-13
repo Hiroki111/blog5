@@ -55,8 +55,9 @@ export default class PostList extends React.Component {
 
 	render() {
 		const panels = [];
+		const searchString = this.state.searchBox.toLowerCase();
 		const posts = this.props.posts.filter((post)=>{
-			return (post.title.includes(this.state.searchBox) || post.body.includes(this.state.searchBox));
+			return post.title.toLowerCase().includes(searchString) || post.body.toLowerCase().includes(searchString);
 		});
 
 		posts.forEach((post) => {
