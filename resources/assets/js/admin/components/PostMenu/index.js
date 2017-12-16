@@ -6,7 +6,7 @@ import {
 }
 from 'react-router-dom';
 
-export default class Posts extends React.Component {
+export default class PostMenu extends React.Component {
 	constructor(props) {
 		super(props);
 	}
