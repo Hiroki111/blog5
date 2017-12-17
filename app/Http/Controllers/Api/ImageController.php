@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class ImageController extends Controller
 {
@@ -27,7 +28,12 @@ class ImageController extends Controller
     public function store()
     {
         if ($this->request->hasFile('image')) {
-            return Storage::putFile(env('IMAGE_FOLDER'), $this->request->file('image'));
+            $file = $this->request->file('image');
+            $name = $file->getClientOriginalName();
+            $file = Image::make($file);
+            $file = (string) $file->encode();
+            Storage::put(env('IMAGE_FOLDER') . $name, $file);
+            return;
         }
 
         return 'No file selected';

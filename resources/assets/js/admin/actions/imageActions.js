@@ -19,17 +19,25 @@ export function fetchImagesFulfilled(images) {
 	};
 }
 
-export function fetchIMAGESRejected(error) {
+export function fetchImageSRejected(error) {
 	return {
 		type: "FETCH_IMAGES_REJECTED",
 		data: error
 	};
 }
 
-export function addImage(values) {
+export function addImage(image) {
+	//Javascript's File class needs to be in FormData
+	//for it to be sent with axios.
+	const formData = new FormData();
+	formData.append("image", image);
+
 	const request = axios({
 		method: 'post',
-		data: values,
+		headers: {
+			'Content-Type': 'multipart/form-data'
+		},
+		data: formData,
 		url: '/images',
 	});
 
