@@ -21,3 +21,4 @@ Route::get('/admin', 'AdminPageController@index')->name('admin');
 
 /*Internal APIs - ones which are not used by external applications*/
 Route::resource('posts', 'Api\PostController');
+Route::resource('images', 'Api\ImageController');

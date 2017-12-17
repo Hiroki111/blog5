@@ -8,7 +8,7 @@ import {
 }
 from 'react-router-dom';
 import PostMenu from './PostMenu';
-import Images from './Images';
+import ImageMenu from './ImageMenu';
 import Comments from './Comments';
 import Stats from './Stats';
 import PostEditor from './PostEditor';
@@ -22,16 +22,19 @@ import {
 	fetchPostsRejected
 }
 from '../actions/postActions';
-import Notifications from 'react-notify-toast';
 import {
-	PulseLoader
+	fetchImages,
+	fetchImagesFulfilled,
+	fetchImagesRejected
 }
-from 'react-spinners';
+from '../actions/imageActions';
+import Notifications from 'react-notify-toast';
+import LoadingAnimation from './LoadingAnimation';
 
 @connect((store) => {
 	return {
 		posts: store.post.posts,
-		loading: store.post.loading,
+		images: store.image.posts,
 		form: store.form
 	};
 })
@@ -46,14 +49,18 @@ export default class App extends React.Component {
 		}).catch((error) => {
 			this.props.dispatch(fetchPostsRejected(error));
 		});
+
+		this.props.dispatch(fetchImages()).data.then((result) => {
+			this.props.dispatch(fetchImagesFulfilled(result.data));
+		}).catch((error) => {
+			this.props.dispatch(fetchImagesRejected(error));
+		});
 	}
 
 	render() {
 		return (
 			<div>
-				<div className='sweet-loading loading-bar'>
-        			<PulseLoader color={'#123abc'} loading={this.props.loading} size={30} />
-      			</div>
+				<LoadingAnimation />
 				<Notifications />
 				<HashRouter>
 					<div style={{'marginTop':"30px", 'marginLeft':'10px'}}>
@@ -77,7 +84,7 @@ export default class App extends React.Component {
 								<Route exact path="/posts/" render={(props) => <PostMenu posts={this.props.posts}/>}/>
 								<Route path="/posts/new" component={PostEditor}/>
 								<Route exact path='/posts/edit/:postId?' component={PostEditor}/>
-								<Route exact path="/images" component={Images}/>
+								<Route exact path="/images" component={ImageMenu}/>
 								<Route exact path="/comments" component={Comments}/>
 								<Route exact path="/stats" component={Stats}/>
 							</Switch>
