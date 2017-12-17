@@ -16,18 +16,18 @@ class ImageController extends Controller
 
     public function index()
     {
-        return Storage::allFiles(public_path() . '/images');
+        return Storage::allFiles(env('IMAGE_FOLDER'));
     }
 
     public function show($fileName)
     {
-        return Storage::file(public_path() . '/images/' . $fileName);
+        return Storage::file(env('IMAGE_FOLDER') . $fileName);
     }
 
     public function store()
     {
         if ($this->request->hasFile('image')) {
-            return Storage::putFile(public_path() . '/images/', $this->request->file('image'));
+            return Storage::putFile(env('IMAGE_FOLDER'), $this->request->file('image'));
         }
 
         return 'No file selected';
@@ -35,6 +35,6 @@ class ImageController extends Controller
 
     public function destroy($fileName)
     {
-        return Storage::delete($fileName);
+        return Storage::delete(env('IMAGE_FOLDER') . $fileName);
     }
 }
