@@ -84,7 +84,7 @@ export default class App extends React.Component {
 								<Route exact path="/posts/" render={(props) => <PostMenu posts={this.props.posts}/>}/>
 								<Route path="/posts/new" component={PostEditor}/>
 								<Route exact path='/posts/edit/:postId?' component={PostEditor}/>
-								<Route exact path="/images" component={ImageMenu}/>
+								<Route exact path="/images" render={(props) => <ImageMenu images={this.props.images}/>}/>
 								<Route exact path="/comments" component={Comments}/>
 								<Route exact path="/stats" component={Stats}/>
 							</Switch>
