@@ -34,7 +34,7 @@ import LoadingAnimation from './LoadingAnimation';
 @connect((store) => {
 	return {
 		posts: store.post.posts,
-		images: store.image.posts,
+		images: store.image.images,
 		form: store.form
 	};
 })
