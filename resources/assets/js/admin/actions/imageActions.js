@@ -61,10 +61,13 @@ export function addImageRejected(error) {
 	};
 }
 
-export function deleteImage(name) {
+export function deleteImage(image) {
 	const request = axios({
 		method: 'delete',
-		url: '/images/' + name,
+		url: '/images',
+		data: {
+			image: image
+		}
 	});
 
 	return {

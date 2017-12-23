@@ -21,9 +21,8 @@ export default {
 	imageFigure: {
 		width: 235,
 		height: 235,
-		overflow: 'hidden'
-	},
-	image: {
-		maxHeight: '100%'
+		overflowY: 'hidden',
+		overflowX: 'hidden',
+		border: '1px solid #e7e7e7'
 	}
 };

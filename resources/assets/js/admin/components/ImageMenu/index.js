@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropzone from 'react-dropzone';
+import ImageModal from '../ImageModal';
 import {
 	addImage,
 	addImageFulfilled,
@@ -19,22 +20,44 @@ import styles from "./styles";
 class ImageMenu extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			showModal: false,
+			selectedImage: "",
+		};
+		this.onClick = this.onClick.bind(this);
+		this.handleClickClose = this.handleClickClose.bind(this);
 	}
 
 	onImageDrop(files) {
 		return this.props.dispatch(addImage(files[0])).data.then((result) => {
-			notify.show('Saved', 'success', 20000);
+			notify.show('Saved', 'success', 4000);
 			this.props.dispatch(addImageFulfilled(result.data));
 		}).catch((error) => {
 			this.props.dispatch(addImageRejected());
 		});
 	}
 
+	onClick(image) {
+		this.setState({
+			showModal: true,
+			selectedImage: image
+		});
+	}
+
+	handleClickClose() {
+		this.setState({
+			showModal: false
+		});
+	}
+
 	render() {
 		const images = this.props.images.map((image, index) => {
 			return <div key={index} style={styles.imageFrame}>
-						<figure style={styles.imageFigure}>
-							<img key={index} src={'/storage/' +image} style={styles.image} />
+						<figure key={index} style={styles.imageFigure}>
+							<img
+								key={index}
+								src={'/storage/'+image}
+								onClick={() => this.onClick(image)}/>
 						</figure>
 					</div>;
 		});
@@ -52,10 +75,14 @@ class ImageMenu extends React.Component {
       			<div style={styles.imageList}>
       				{images}
       			</div>
+      			<ImageModal
+      				show={this.state.showModal}
+      				onHide={() => this.handleClickClose()}
+      				selectedImage={this.state.selectedImage}/>
     		</div>
 		);
 
 	}
 }
 
-export default connect()(ImageMenu)
+export default connect()(ImageMenu);

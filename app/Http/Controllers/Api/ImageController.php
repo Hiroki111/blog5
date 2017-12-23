@@ -33,15 +33,17 @@ class ImageController extends Controller
 
         $file = $this->request->file('image');
         $name = $file->getClientOriginalName();
-        $name = date("YmdHis") . '.png';
+        $name = env('STORAGE_IMAGE_FOLDER') . date("YmdHis") . '.png';
         $file = Image::make($file);
         $file = (string) $file->encode();
-        Storage::put('/images/' . $name, $file);
-        return env('STORAGE_IMAGE_FOLDER') . $name;
+        Storage::put($name, $file);
+        return $name;
     }
 
-    public function destroy($fileName)
+    public function destroy()
     {
-        return Storage::delete(env('STORAGE_IMAGE_FOLDER') . $fileName);
+        $fileName = $this->request->input('image');
+        Storage::delete($fileName);
+        return $fileName;
     }
 }
