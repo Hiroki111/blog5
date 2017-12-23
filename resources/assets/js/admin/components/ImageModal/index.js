@@ -41,7 +41,7 @@ class ImageModal extends React.Component {
 			<Modal show={this.props.show} bsSize="large" aria-labelledby="contained-modal-title-lg">
         		<Modal.Body>
         			<img src={'/storage/'+this.props.selectedImage} style={styles.image} />
-        			<p>{this.props.selectedImage}</p>
+        			<p>{'/storage/'+this.props.selectedImage}</p>
         		</Modal.Body>
         		<Modal.Footer>
         			<Button
