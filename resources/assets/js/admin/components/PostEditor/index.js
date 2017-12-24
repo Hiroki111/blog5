@@ -60,12 +60,7 @@ class PostEditor extends React.Component {
 		const {
 			push
 		} = this.props.history;
-		return (
-			<div>
-				<Link to="/posts">Return</Link>
-				<Form onSubmit={data=> this.handleSubmit(data, push)}/>
-			</div>
-		);
+		return (<Form onSubmit={data=> this.handleSubmit(data, push)}/>);
 	}
 }
 

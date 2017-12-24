@@ -14,12 +14,11 @@ import {
 from 'redux-form';
 import styles from "./styles";
 import RichTextMarkdown from './rte';
+import {
+	Link
+}
+from 'react-router-dom';
 
-@connect((store) => {
-	return {
-		post: store.post.post
-	};
-})
 class Form extends React.Component {
 	constructor(props) {
 		super(props);
@@ -32,6 +31,7 @@ class Form extends React.Component {
 		} = this.props;
 		return (
 			<div>
+				<Link to="/posts">Return</Link>
 				<form onSubmit={handleSubmit}>
 					<div style={styles.alartDiv}>
 	        			{error &&
