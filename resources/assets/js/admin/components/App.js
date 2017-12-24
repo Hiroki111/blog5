@@ -31,30 +31,14 @@ from '../actions/imageActions';
 import Notifications from 'react-notify-toast';
 import LoadingAnimation from './LoadingAnimation';
 
-@connect((store) => {
-	return {
-		posts: store.post.posts,
-		images: store.image.images,
-		form: store.form
-	};
-})
-export default class App extends React.Component {
+class App extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 
 	componentWillMount() {
-		this.props.dispatch(fetchPosts()).data.then((result) => {
-			this.props.dispatch(fetchPostsFulfilled(result.data));
-		}).catch((error) => {
-			this.props.dispatch(fetchPostsRejected(error));
-		});
-
-		this.props.dispatch(fetchImages()).data.then((result) => {
-			this.props.dispatch(fetchImagesFulfilled(result.data));
-		}).catch((error) => {
-			this.props.dispatch(fetchImagesRejected(error));
-		});
+		this.props.fetchPosts();
+		this.props.fetchImages();
 	}
 
 	render() {
@@ -95,3 +79,31 @@ export default class App extends React.Component {
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		posts: state.post.posts,
+		images: state.image.images,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchPosts: () => {
+			dispatch(fetchPosts()).data.then((result) => {
+				dispatch(fetchPostsFulfilled(result.data));
+			}).catch((error) => {
+				dispatch(fetchPostsRejected(error));
+			});
+		},
+		fetchImages: () => {
+			dispatch(fetchImages()).data.then((result) => {
+				dispatch(fetchImagesFulfilled(result.data));
+			}).catch((error) => {
+				dispatch(fetchImagesRejected(error));
+			});
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
