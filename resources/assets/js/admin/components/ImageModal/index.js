@@ -41,7 +41,7 @@ class ImageModal extends React.Component {
         			<Button
         				bsStyle="danger"
         				style={styles.deleteButton}
-        				onClick={() => this.clickDelete(this.props.selectedImage)}>Delte</Button>
+        				onClick={() => this.clickDelete(this.props.selectedImage)}>Delete</Button>
           			<Button onClick={this.props.onHide}>Close</Button>
         		</Modal.Footer>
       		</Modal>
