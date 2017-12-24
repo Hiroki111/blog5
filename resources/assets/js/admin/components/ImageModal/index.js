@@ -27,13 +27,7 @@ class ImageModal extends React.Component {
 	}
 
 	clickDelete(file) {
-		return this.props.dispatch(deleteImage(file)).data.then((result) => {
-			notify.show('Image Delted.', 'success', 4000);
-			this.props.dispatch(deleteImageFulfilled(result.data));
-			this.props.onHide();
-		}).catch((error) => {
-			this.props.dispatch(deleteImageRejected());
-		});
+		return this.props.deleteImage(file).then(() => this.props.onHide());
 	}
 
 	render() {
@@ -55,4 +49,19 @@ class ImageModal extends React.Component {
 	}
 }
 
-export default connect()(ImageModal);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		deleteImage: (file) => {
+			return dispatch(deleteImage(file)).data.then((result) => {
+				notify.show('Image Delted.', 'success', 4000);
+				dispatch(deleteImageFulfilled(result.data));
+			}).catch((error) => {
+				notify.show('Unalble to delete this image.', 'error', 4000);
+				dispatch(deleteImageRejected());
+				throw Error(error);
+			});
+		}
+	}
+}
+
+export default connect(null, mapDispatchToProps)(ImageModal);
