@@ -24,12 +24,7 @@ import ConfirmationService from '../../services/ConfirmationService';
 import ReactDOM from 'react-dom';
 import lodash from 'lodash';
 
-@connect((store) => {
-	return {
-		post: store.post.post
-	};
-})
-export default class PostList extends React.Component {
+class PostList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -39,12 +34,8 @@ export default class PostList extends React.Component {
 
 	onPressDelete(id) {
 		ConfirmationService('Do you really wish to delete this post?').then((result) => {
-			this.props.dispatch(deletePost(id)).data.then((result) => {
-				this.props.dispatch(deletePostFulfilled(id));
-			}).catch((error) => {
-				this.props.dispatch(deletePostRejected(error));
-			});
-		},(cancel) => {});
+			this.props.deletePost(id);
+		}, (cancel) => {});
 	}
 
 	handleChange(event) {
@@ -56,7 +47,7 @@ export default class PostList extends React.Component {
 	render() {
 		const panels = [];
 		const searchString = this.state.searchBox.toLowerCase();
-		const posts = this.props.posts.filter((post)=>{
+		const posts = this.props.posts.filter((post) => {
 			return post.title.toLowerCase().includes(searchString) || post.body.toLowerCase().includes(searchString);
 		});
 
@@ -102,3 +93,17 @@ export default class PostList extends React.Component {
 		);
 	}
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		deletePost: (id) => {
+			dispatch(deletePost(id)).data.then((result) => {
+				dispatch(deletePostFulfilled(id));
+			}).catch((error) => {
+				dispatch(deletePostRejected(error));
+			});
+		}
+	}
+}
+
+export default connect(null, mapDispatchToProps)(PostList);
