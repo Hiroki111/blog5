@@ -32,66 +32,83 @@ import {
 }
 from 'react-notify-toast';
 
-@connect((store) => {
-	return {
-		post: store.post.post
-	};
-})
-export default class PostEditor extends React.Component {
+class PostEditor extends React.Component {
 	constructor(props) {
 		super(props);
-		this.onSubmit = this.onSubmit.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 
 	}
 
 	componentWillMount() {
-		let id = this.props.match.params.postId;
+		const id = this.props.match.params.postId;
 
-		if (!id) this.props.dispatch(resetPost());
-		else {
-			id = Number(id);
-			this.props.dispatch(getPost(id)).data.then((result) => {
-				this.props.dispatch(getPostFulfilled(result.data));
-			}).catch((error) => {
-				this.props.dispatch(getPostRejected(error));
-			});
-		}
+		if (!id)
+			this.props.resetPost();
+		else
+			this.props.getPost(Number(id));
 	}
 
-	onSubmit(data) {
+	handleSubmit(data, push) {
 		data.active = (data.active) ? 1 : 0;
-		if (!data.hasOwnProperty("id")) {
-			return this.props.dispatch(addPost(data)).data.then((result) => {
-				notify.show('Saved', 'success', 4000);
-				this.props.dispatch(addPostFulfilled(result.data));
-				this.props.history.push('/posts')
+		if (!data.hasOwnProperty("id"))
+			return this.props.addPost(data, push);
+		else
+			return this.props.updatePost(data.id, data, push);
+	}
+
+	render() {
+		const {
+			push
+		} = this.props.history;
+		return (
+			<div>
+				<Link to="/posts">Return</Link>
+				<Form onSubmit={data=> this.handleSubmit(data, push)}/>
+			</div>
+		);
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getPost: (id) => {
+			dispatch(getPost(id)).data.then((result) => {
+				dispatch(getPostFulfilled(result.data));
 			}).catch((error) => {
-				this.props.dispatch(addPostRejected());
+				dispatch(getPostRejected(error));
+			})
+		},
+		addPost: (data, push) => {
+			return dispatch(addPost(data)).data.then((result) => {
+				notify.show('Saved', 'success', 3000);
+				dispatch(addPostFulfilled(result.data));
+				push('/posts');
+			}).catch((error) => {
+				dispatch(addPostRejected());
 				var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
 				throw new SubmissionError({
 					_error: messages
 				});
 			});
-		}
-		return this.props.dispatch(updatePost(data.id, data)).data.then((result) => {
-			notify.show('Saved', 'success', 4000);
-			this.props.dispatch(updatePostFulfilled(result.data));
-			this.props.history.push('/posts')
-		}).catch((error) => {
-			this.props.dispatch(updatePostRejected(error));
-			var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
-			throw new SubmissionError({
-				_error: messages
+		},
+		updatePost: (id, data, push) => {
+			return dispatch(updatePost(id, data)).data.then((result) => {
+				notify.show('Saved', 'success', 3000);
+				dispatch(updatePostFulfilled(result.data));
+				push('/posts');
+			}).catch((error) => {
+				dispatch(updatePostRejected(error));
+				var messages = Object.keys(error.response.data).map(key => error.response.data[key]);
+				throw new SubmissionError({
+					_error: messages
+				});
 			});
-		});
-	}
 
-	render() {
-		return (
-			<div>
-				<Link to="/posts">Return</Link>
-				<Form onSubmit={data=> this.onSubmit(data)}/>
-			</div>
-		);
+		},
+		resetPost: () => {
+			dispatch(resetPost());
+		}
 	}
 }
+
+export default connect(null, mapDispatchToProps)(PostEditor);
