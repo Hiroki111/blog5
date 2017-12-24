@@ -29,12 +29,7 @@ class ImageMenu extends React.Component {
 	}
 
 	onImageDrop(files) {
-		return this.props.dispatch(addImage(files[0])).data.then((result) => {
-			notify.show('Saved', 'success', 4000);
-			this.props.dispatch(addImageFulfilled(result.data));
-		}).catch((error) => {
-			this.props.dispatch(addImageRejected());
-		});
+		return this.props.addImage(files[0]);
 	}
 
 	onClick(image) {
@@ -85,4 +80,18 @@ class ImageMenu extends React.Component {
 	}
 }
 
-export default connect()(ImageMenu);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addImage: (file) => {
+			return dispatch(addImage(file)).data.then((result) => {
+				notify.show('Saved', 'success', 4000);
+				dispatch(addImageFulfilled(result.data));
+			}).catch((error) => {
+				notify.show('Unalble to save this image.', 'error', 4000);
+				dispatch(addImageRejected());
+			});
+		}
+	}
+}
+
+export default connect(null, mapDispatchToProps)(ImageMenu);
