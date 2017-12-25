@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
+
+    protected $request;
+    protected $post;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request, Post $post)
     {
-        $this->middleware('auth');
+        $this->post    = $post;
+        $this->request = $request;
     }
 
     /**
@@ -21,6 +28,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        return view('index', [
+            'posts' => $this->post->where('active', '=', 1)->orderBy('id', 'dec')->get(),
+        ]);
     }
 }
