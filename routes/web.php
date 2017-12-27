@@ -12,6 +12,8 @@
  */
 
 Route::get('/', 'HomeController@index');
+Route::get('/{url}', 'HomeController@show');
+
 Auth::routes();
 
 Route::get('/admin', 'AdminPageController@index')->name('admin');

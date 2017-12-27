@@ -32,4 +32,11 @@ class HomeController extends Controller
             'posts' => $this->post->where('active', '=', 1)->orderBy('id', 'dec')->get(),
         ]);
     }
+
+    public function show($url)
+    {
+        return view('post', [
+            'post' => $this->post->where('url', '=', $url)->first(),
+        ]);
+    }
 }
