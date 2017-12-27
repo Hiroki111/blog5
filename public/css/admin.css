@@ -1,0 +1,45 @@
+.sidebar {
+    font-size: 13px;
+    background: #eee;
+    overflow: auto;
+    position: fixed;
+    height: 100vh;
+    left: 0px;
+    top: 47px;
+    bottom: 0px;
+    width: 250px;
+    display: block;
+    list-style-type: none;
+    padding-top: 30px;    
+}
+
+.sidebar-list{
+    font-size:1.5rem;
+    height: 40px;
+}
+
+.sidebar-list > a{
+    color: black;
+}
+
+.admin-contents{
+    margin-left: 250px;
+    display: block;
+}
+
+.active {
+    font-weight: bold;
+    color: red;
+}
+
+.navbar{
+    box-shadow: 0 5px 0px -12px rgba(0, 0, 0, 0), 0 3px 10px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    
+}
+
+.loading-bar{
+    z-index: 1;
+    position:absolute;
+    left: 50%;
+    top: 50%;
+}

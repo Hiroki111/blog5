@@ -1,0 +1,127 @@
+header{
+    height: 140px;
+    background-color: white;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+#logo_image{
+    float: left;
+}
+
+#about_image{
+    max-width: 200px;
+}
+
+#logo_link{
+    text-decoration: none;
+    color: black;    
+}
+
+#header_title{
+    font-size: 250%;
+    font-family: Impact,  sans-serif;
+    color: black;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+#subheader_title{
+    font-family: Impact,  sans-serif;
+    color: black;
+    text-align: left;
+    margin-top: 0;
+}
+
+body {
+    margin: 0;
+}
+
+#container{
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    margin-top: 20px;
+}
+
+#posts{
+    width: 70%;
+    float: left;
+}
+
+.post_wrapper{
+    height: 300px;
+}
+
+.title_header{
+    font-size: 150%;
+}
+
+.title_header > a{
+    text-decoration: none;
+    color: black; 
+}
+
+.post_excerpt{
+    line-height: 1.5em;
+    height: 9em;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.post_continue_botton{
+    margin-top: 20px;
+}
+
+/*a{text-decoration: none;}
+*/
+p{
+    font-size: 120%;
+}
+/* div, which may contain ul, li, etc. */
+#side_bar{
+    float: right;
+    width: 25%;
+    float: top;
+    font-family: Impact, Charcoal, sans-serif;
+    text-align: left;
+}
+
+#side_bar > a{  
+    text-decoration: none;
+    color: black;
+}
+
+/* "list-style" applies to ul */
+#sidebar_item{
+    list-style: none;
+}
+
+/* "text-decoration", deleting the underlines of links, applies to "a"*/
+/*ul li a{
+    text-decoration: none;
+}
+*/
+
+/* http://www.lwis.net/journal/2008/02/08/pure-css-sticky-footer/ */
+html, body, #container { height: 100%; }
+body > #container { height: auto; min-height: 100%; }
+#footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+    text-align: center;
+    background-color: #d5d5d5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Bitter, Georgia, serif;
+}
