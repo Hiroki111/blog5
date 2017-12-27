@@ -14,6 +14,10 @@
         <div id="posts">
             @yield('content')
         </div>
+        <div id="side_bar">
+            <h2>About the author</h2>
+            <img id="about_image" src="/storage/about.jpg">
+        </div>
     </div>
 </body>
 </html>

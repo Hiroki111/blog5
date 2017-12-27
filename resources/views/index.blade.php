@@ -6,10 +6,12 @@
 @section('content')
 
 @foreach($posts as $post)
-<h1 class="titleDiv" id="title_{{$post->id}}">{{$post->title}}</h1>
+<div class="titleHeader">
+    <h1 id="title_{{$post->id}}">{{$post->title}}</h1>
+</div>
 <h4>{{date("d M Y", strtotime($post->published_at))}}</h4>
 <div >
-    <div id="body_{{$post->id}}" class="show_partially" style="width: 800px;">{!! $post->body !!}</div>
+    <div id="body_{{$post->id}}">{!! $post->body !!}</div>
 </div>
 @endforeach
 
