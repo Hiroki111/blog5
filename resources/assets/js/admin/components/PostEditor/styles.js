@@ -17,4 +17,9 @@ export default {
 		marginTop: '10px',
 		marginBottom: '10px',
 	},
+	url: {
+		border: 0,
+		color: 'gray',
+		width: '100%'
+	}
 };

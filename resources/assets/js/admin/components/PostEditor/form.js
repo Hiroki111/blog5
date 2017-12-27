@@ -43,13 +43,18 @@ class Form extends React.Component {
 	        			<div className="clearfix"></div>
 	    			</div>				
 	    			<div style={styles.divStyle}>
-	    				<div className="form-group" style={styles.divStyle}>
+	    				<div className="form-group">
 							<Field name="title"
 								component="input"
 								type="text"
 								placeholder="Title"
 								className="form-control" />
 		        			<span className="material-input"></span>
+		        			<input readOnly
+		        				type="text"
+		        				value={ROOT_URL+this.props.url}
+		        				placeholder="URL"
+		        				style={styles.url} />
 		        		</div>
 		        	</div>
 					<div style={styles.divStyle}>

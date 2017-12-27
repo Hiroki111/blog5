@@ -45,6 +45,7 @@ class PostController extends Controller
     {
         $post = $this->post->create([
             'title'        => $this->request->input('title'),
+            'url'          => $this->request->input('url'),
             'active'       => $this->request->input('active'),
             'body'         => $this->request->input('body'),
             'user_id'      => Auth::id(),
@@ -87,6 +88,7 @@ class PostController extends Controller
         $post = $this->post->find($id);
         $post->update([
             'title'        => $this->request->input('title'),
+            'url'          => $this->request->input('url'),
             'active'       => $this->request->input('active'),
             'body'         => $this->request->input('body'),
             'user_id'      => Auth::id(),

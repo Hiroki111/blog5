@@ -11,7 +11,8 @@ import axios from 'axios';
 import Form from './form';
 import styles from './styles';
 import {
-	SubmissionError
+	SubmissionError,
+	getFormValues
 }
 from 'redux-form';
 import {
@@ -35,8 +36,10 @@ from 'react-notify-toast';
 class PostEditor extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			url: ""
+		}
 		this.handleSubmit = this.handleSubmit.bind(this);
-
 	}
 
 	componentWillMount() {
@@ -48,8 +51,17 @@ class PostEditor extends React.Component {
 			this.props.getPost(Number(id));
 	}
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.Form && nextProps.Form.title) {
+			this.setState({
+				url: nextProps.Form.title.replace(/[^a-zA-Z0-9]/g, '-')
+			});
+		}
+	}
+
 	handleSubmit(data, push) {
 		data.active = (data.active) ? 1 : 0;
+		data.url = this.state.url;
 		if (!data.hasOwnProperty("id"))
 			return this.props.addPost(data, push);
 		else
@@ -60,7 +72,13 @@ class PostEditor extends React.Component {
 		const {
 			push
 		} = this.props.history;
-		return (<Form onSubmit={data=> this.handleSubmit(data, push)}/>);
+		return (<Form onSubmit={data=> this.handleSubmit(data, push)} url={this.state.url} />);
+	}
+}
+
+const mapStateToProps = (state) => {
+	return {
+		Form: getFormValues('Form')(state)
 	}
 }
 
@@ -106,4 +124,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(PostEditor);
+export default connect(mapStateToProps, mapDispatchToProps)(PostEditor);
