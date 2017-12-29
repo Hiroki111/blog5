@@ -29,14 +29,30 @@ class HomeController extends Controller
     public function index()
     {
         return view('index', [
-            'posts' => $this->post->where('active', '=', 1)->orderBy('id', 'dec')->get(),
+            'posts' => $this->post->where('active', '=', 1)
+                ->orderBy('id', 'dec')
+                ->paginate(5),
         ]);
     }
 
     public function show($url)
     {
+        $post = $this->post->where('url', '=', $url)
+            ->where('active', '=', 1)
+            ->first();
+        $prev = $this->post->where('id', '<', $post->id)
+            ->where('active', '=', 1)
+            ->orderBy('id', 'dec')
+            ->first();
+        $next = $this->post->where('id', '>', $post->id)
+            ->where('active', '=', 1)
+            ->orderBy('id', 'dec')
+            ->first();
+
         return view('post', [
-            'post' => $this->post->where('url', '=', $url)->first(),
+            'post' => $post,
+            'prev' => $prev,
+            'next' => $next,
         ]);
     }
 }

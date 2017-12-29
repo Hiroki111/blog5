@@ -4,8 +4,8 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/www.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/lib.js') }}"></script>
+
 </head>
 <body>
     <header>

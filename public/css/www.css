@@ -46,7 +46,7 @@ body {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
-    padding-bottom: 60px;
+    padding-bottom: 20px;
     margin-top: 20px;
 }
 
@@ -103,11 +103,9 @@ p{
     list-style: none;
 }
 
-/* "text-decoration", deleting the underlines of links, applies to "a"*/
-/*ul li a{
-    text-decoration: none;
+.pagination_links{
+    margin-top: 80px;
 }
-*/
 
 /* http://www.lwis.net/journal/2008/02/08/pure-css-sticky-footer/ */
 html, body, #container { height: 100%; }

@@ -23,4 +23,7 @@
 </div>
 @endforeach
 
+<div class="pagination_links">
+	{{ $posts->links() }}
+</div>
 @endsection
